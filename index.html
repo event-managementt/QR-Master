@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <title>QR Master - QR Code Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="header-icon-box">
+        <img src="img/logo.png" alt="QR Master Icon"/>
+      </div>
+      <h1 class="header-title">QR Master</h1>
+    </div>
+  </header>
+
+  <main class="glass-card">
+    <div class="tabs-container" id="tabs-container">
+      <button id="tab-generator" class="tab-btn active">
+        <i data-lucide="sparkles"></i> <span>Generator</span>
+      </button>
+      <button id="tab-scanner" class="tab-btn">
+        <i data-lucide="scan-line"></i> <span>Scanner</span>
+      </button>
+      <div id="tab-indicator" class="tab-indicator"></div>
+    </div>
+
+    <div id="section-generator" class="content-grid">
+      <div class="col-left">
+        
+        <div>
+          <div class="category-header">
+            <label class="category-label">Choose Category</label>
+            <button id="toggle-view-btn" class="view-toggle" title="Change Layout View">
+              <i data-lucide="list" id="view-icon"></i> <span id="view-text">Scroll</span>
+            </button>
+          </div>
+          
+          <div style="position: relative;">
+              <div class="view-grid" id="type-buttons">
+                <button class="type-btn active" data-type="url"><i data-lucide="link"></i> URL</button>
+                <button class="type-btn" data-type="text"><i data-lucide="align-left"></i> Text</button>
+                <button class="type-btn" data-type="vcard"><i data-lucide="contact"></i> vCard</button>
+                <button class="type-btn" data-type="email"><i data-lucide="mail"></i> Email</button>
+                <button class="type-btn" data-type="sms"><i data-lucide="message-square-text"></i> SMS</button>
+                <button class="type-btn" data-type="wifi"><i data-lucide="wifi"></i> WiFi</button>
+                <button class="type-btn" data-type="phone"><i data-lucide="phone"></i> Call</button>
+                <button class="type-btn" data-type="whatsapp">
+                  <img src="https://api.iconify.design/simple-icons/whatsapp.svg?color=%23475569" class="custom-icon" style="width: 1.4rem; height: 1.4rem;" alt="WA"> WhatsApp </button>
+                <button class="type-btn" data-type="upi"><i data-lucide="indian-rupee" style="color:#059669;"></i> UPI</button>
+                <button class="type-btn" data-type="map"><i data-lucide="map-pin" style="color:#3b82f6;"></i> Map</button>
+                <button class="type-btn" data-type="youtube">
+                  <img src="https://api.iconify.design/simple-icons/youtube.svg?color=%23475569" class="custom-icon" style="width: 1.4rem; height: 1.4rem;" alt="YT"> YouTube </button>
+                <button class="type-btn" data-type="instagram">
+                  <img src="https://api.iconify.design/simple-icons/instagram.svg?color=%23475569" class="custom-icon" style="width: 1.4rem; height: 1.4rem;" alt="IG"> Instagram </button>
+                <button class="type-btn" data-type="facebook">
+                  <img src="https://api.iconify.design/simple-icons/facebook.svg?color=%23475569" class="custom-icon" style="width: 1.4rem; height: 1.4rem;" alt="FB"> Facebook </button>
+                <button class="type-btn" data-type="linkedin">
+                  <img src="https://api.iconify.design/simple-icons/linkedin.svg?color=%23475569" class="custom-icon" style="width: 1.4rem; height: 1.4rem;" alt="IN"> LinkedIn </button>
+                <button class="type-btn" data-type="telegram">
+                  <img src="https://api.iconify.design/simple-icons/telegram.svg?color=%23475569" class="custom-icon" style="width: 1.4rem; height: 1.4rem;" alt="TG"> Telegram </button>
+                <button class="type-btn" data-type="app"><i data-lucide="layout-grid" style="color:#334155;"></i> Apps</button>
+              </div>
+              <div id="grid-fade" class="fade-overlay hide"></div>
+          </div>
+          
+          <div id="scroll-hint" class="scroll-hint hide">
+            <div class="scroll-hint-inner">
+              <i data-lucide="move-horizontal"></i>
+              <span>Swipe right for more options</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="premium-card">
+          <label class="card-title-small"><span></span> Enter Details</label>
+          <div id="dynamic-inputs" class="inputs-wrapper"></div>
+          <div id="input-error-msg" class="error-box hide">
+            <i data-lucide="info"></i> <span id="error-msg-text">Please fill in the details.</span>
+          </div>
+        </div>
+
+        <div class="premium-card">
+          <h3 class="card-title-icon">
+            <div class="icon-wrap"><i data-lucide="palette"></i></div> Customize & Design
+          </h3>
+          <div class="design-grid">
+            <div><label class="design-label">QR Color</label><div class="color-picker"><input type="color" id="color-dark" value="#0f172a"></div></div>
+            <div><label class="design-label">Background</label><div class="color-picker"><input type="color" id="color-light" value="#ffffff"></div></div>
+            <div><label class="design-label">Pattern</label><select id="dots-style" class="custom-input" style="padding:0 0.75rem; height:2.5rem;"><option value="square">Square</option><option value="rounded" selected>Rounded</option></select></div>
+            <div><label class="design-label">Corners</label><select id="corners-style" class="custom-input" style="padding:0 0.75rem; height:2.5rem;"><option value="square">Square</option><option value="extra-rounded" selected>Rounded</option></select></div>
+          </div>
+          <div>
+            <label class="design-label">Center Logo</label>
+            <div class="logo-section">
+              <label class="btn-upload"><i data-lucide="image-plus"></i> Upload Logo<input type="file" id="logo-input" accept="image/*" class="hide"></label>
+              <button id="clear-logo" class="btn-remove hide"><i data-lucide="trash-2"></i> Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-right">
+        <div class="premium-card preview-card">
+          <div class="preview-top-line"></div>
+          <h3 class="preview-title"><span id="preview-indicator" class="status-dot active"></span> Live Preview</h3>
+          
+          <div id="qr-preview-wrapper" class="qr-container disabled"></div>
+
+          <div class="dl-controls">
+            <div>
+              <label class="design-label" style="margin-bottom:0.375rem;">Resolution</label>
+              <select id="qr-size" class="custom-input">
+                <option value="256">256 x 256 px</option>
+                <option value="512" selected>512 x 512 px (Standard)</option>
+                <option value="1024">1024 x 1024 px</option>
+                <option value="2048">2048 x 2048 px</option>
+              </select>
+            </div>
+            <div>
+              <label class="design-label" style="margin-bottom:0.375rem;">Format</label>
+              <div class="format-wrap">
+                <button id="btn-format-png" class="format-btn active">PNG</button>
+                <button id="btn-format-svg" class="format-btn inactive">SVG</button>
+              </div>
+            </div>
+            <button id="main-download-btn" class="btn-download disabled"><i data-lucide="download"></i> Download QR Code</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-scanner" class="scanner-section hide">
+      
+      <div id="ui-message" class="alert-msg hide">
+        <i data-lucide="alert-circle"></i><span id="ui-message-text"></span>
+      </div>
+
+      <div class="scanner-box">
+        <div id="reader">
+          <div id="camera-placeholder" class="cam-placeholder">
+            <div class="cam-icon"><i data-lucide="camera"></i></div>
+            <span class="cam-text">Camera inactive</span>
+          </div>
+        </div>
+        
+        <div class="cam-controls">
+          <button id="scan-camera-btn" class="btn-cam-start"><i data-lucide="video"></i> Start Scan</button>
+          <button id="stop-camera-btn" class="btn-cam-stop hide"><i data-lucide="square"></i> Stop</button>
+        </div>
+      </div>
+
+      <div id="scan-result-container" class="scan-result-box hide">
+        <div class="res-header">
+           <h4 id="scan-type-label" class="res-title">
+             <i data-lucide="check-circle-2"></i> Scan Successful
+           </h4>
+           <button id="copy-result-btn" class="btn-copy" title="Copy Data">
+             <i data-lucide="copy"></i>
+           </button>
+        </div>
+        
+        <div id="scan-rich-content" class="res-content"></div>
+        <textarea id="raw-scan-data" class="hide"></textarea>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer-text">
+    © 2026 QR Master — Built by jaimin.web
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.7/minified/html5-qrcode.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

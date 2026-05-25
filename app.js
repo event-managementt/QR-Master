@@ -74,7 +74,7 @@ const qrCode = new QRCodeStyling(qrOptions);
 qrCode.append(document.getElementById("qr-preview-wrapper"));
 
 const inputTemplates = {
-  url: `<input type="url" id="val-url" placeholder="Website URL" class="custom-input">`,
+  url: `<input type="url" id="val-url" placeholder="https://example.com" class="custom-input">`,
   text: `<textarea id="val-text" placeholder="Enter your text..." class="custom-input" rows="3"></textarea>`,
   email: `<div class="inputs-wrapper"><input type="email" id="val-email" placeholder="Email Address" class="custom-input"><input type="text" id="val-sub" placeholder="Subject" class="custom-input"><textarea id="val-body" placeholder="Message" class="custom-input" rows="2"></textarea></div>`,
   sms: `<div class="inputs-wrapper"><input type="tel" id="val-phone" placeholder="Phone Number" class="custom-input"><textarea id="val-sms-body" placeholder="Message" class="custom-input" rows="2"></textarea></div>`,
@@ -82,7 +82,7 @@ const inputTemplates = {
   vcard: `<div class="inputs-wrapper"><div class="input-grid-2"><input type="text" id="val-fname" placeholder="First Name" class="custom-input"><input type="text" id="val-lname" placeholder="Last Name" class="custom-input"></div><input type="tel" id="val-vc-phone" placeholder="Mobile" class="custom-input"><input type="email" id="val-vc-email" placeholder="Email (Optional)" class="custom-input"><input type="text" id="val-org" placeholder="Company" class="custom-input"></div>`,
   phone: `<input type="tel" id="val-call" placeholder="Phone Number" class="custom-input">`,
   whatsapp: `<div class="inputs-wrapper"><input type="tel" id="val-wa-phone" placeholder="WhatsApp Number" class="custom-input"><textarea id="val-wa-msg" placeholder="Message (Optional)" class="custom-input" rows="2"></textarea></div>`,
-  upi: `<div class="inputs-wrapper"><input type="text" id="val-upi-id" placeholder="UPI ID (e.g. name@bank)" class="custom-input"><input type="text" id="val-upi-name" placeholder="Payee Name" class="custom-input"><input type="number" id="val-upi-amt" placeholder="Amount (Optional)" class="custom-input"></div>`,
+  upi: `<div class="inputs-wrapper"><input type="text" id="val-upi-id" placeholder="UPI ID" class="custom-input"><input type="text" id="val-upi-name" placeholder="Payee Name" class="custom-input"><input type="number" id="val-upi-amt" placeholder="Amount (Optional)" class="custom-input"></div>`,
   map: `<input type="text" id="val-map" placeholder="Location Name or Maps Link" class="custom-input">`,
   youtube: `<input type="url" id="val-yt" placeholder="YouTube URL" class="custom-input">`,
   instagram: `<input type="text" id="val-ig" placeholder="Instagram Username or Link" class="custom-input">`,
